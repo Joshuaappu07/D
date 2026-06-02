@@ -1,0 +1,29 @@
+a. Create Employee table containing all records E_id,E_name,Age,Salary.
+create database employee2;
+USE employee2;
+CREATE TABLE Employee2 (E_id INT,
+E_name VARCHAR(100),Age INT,
+Salary DECIMAL(10, 2));
+DESC Employee2;
+
+INSERT INTO Employee2 (E_id, E_name, Age, Salary)
+VALUES(101, 'John Doe', 30, 50000.00),
+(102, 'ABC', 40, 60000.00),
+(103, 'XYZ', 35, 45000.00),
+(104, 'PQR', 36, 46000.00);
+SELECT * FROM Employee2;
+
+b. Count number of Employee names Employee table.
+SELECT COUNT(E_name) AS NumberOfEmployees FROM Employee2;
+c. Find the Maximum age from Employee table.
+SELECT MAX(Age) AS MaxAge FROM Employee2;
+
+d. Find the minimum age from Employee table.
+SELECT MIN(Age) AS MinAge FROM Employee2;
+
+e. Find salaries of Employee in Ascending order.
+SELECT Salary FROM Employee2 ORDER BY Salary ASC;
+
+f. Find the grouped salaries of employee.
+SELECT salary , 
+COUNT(*) AS NumberOfEmployees FROM employee2
