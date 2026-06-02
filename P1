@@ -1,0 +1,42 @@
+a. Create a user and grant all permission to user.
+-- Create a user and grant all permissions to the user--
+CREATE USER 'myuser'@'localhost' 
+IDENTIFIED BY 'mypassword';
+GRANT ALL PRIVILEGES ON p1.* TO 'myuser'@'localhost';
+
+b. Insert any three records in the Employee table contains attributes
+and use rollback. Check the results.
+create database p1;
+use p1;
+CREATE TABLE Employee (
+ EMPNO INT,
+ ENAME VARCHAR(50),
+ JOB VARCHAR(50),
+ MANAGER_NO INT,
+ SAL DECIMAL(10, 2),
+ COMMISSION DECIMAL(10, 2)
+);
+INSERT INTO Employee
+VALUES
+(1,'John_Doe','Manager',NULL,5000.00,1000.00),
+(2,'Jane Smith','Developer',1,4000.00,500.00),
+(3,'Bob Johnson','Analyst',1,3500.00,NULL);
+ROLLBACK;
+SELECT * FROM Employee;
+
+c. Add primary key constraints and not null constraint to the Employee 
+table.
+ALTER TABLE Employee
+ADD PRIMARY KEY (EMPNO);
+ALTER TABLE Employee
+MODIFY ENAME VARCHAR(50) NOT NULL;
+
+d. Insert null values to the Employee table and verify the result.
+INSERT INTO Employee 
+VALUES
+(5, NULL,’Intern’, NULL, NULL, NULL);
+SELECT * FROM Employee;
+
+
+
+
