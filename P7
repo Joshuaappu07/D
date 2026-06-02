@@ -1,0 +1,13 @@
+a. CREATE
+> db.students.insertOne({name:"Rahul",age:21,course:"BCA"})
+>db.students.insertMany([{name:"Bharath",age:23,course:"CSE"},
+{name:"Adi",age:21,course:"AIML"},{name:"Josh",age:22,course:
+"DATASCIENCE"}])
+b. READ
+> db. students.find()
+c. UPDATE
+> db.students.updateOne({name:"Josh"},{$set:{age:22}})
+d. DELETE
+> db.students.deleteOne({name:"Adi"})
+Verify
+> db.students.find()
