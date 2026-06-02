@@ -1,0 +1,64 @@
+Create database CUSTOMERS;
+USE CUSTOMERS;
+
+-- CREATE CUSTOMER TABLE--
+CREATE TABLE CUSTOMERS(
+ID INT PRIMARY KEY,
+NAME VARCHAR(255),
+AGE INT,
+ADDRESS VARCHAR(255),
+SALARY DECIMAL(10, 2));
+
+-- TABLE INSERT STATEMENTS--
+INSERT INTO CUSTOMERS VALUES (1, 'Ajay Hegde', 50, 'Mysuru', 50000.00);
+INSERT INTO CUSTOMERS VALUES (2, 'Satynaryana Rao', 65, 'Mandya', 45000.00);
+INSERT INTO CUSTOMERS VALUES (3, 'Ravishankar', 35, 'Shivmogga', 60000.00);
+INSERT INTO CUSTOMERS VALUES (4, 'Anish Behl', 28, 'Mangalore', 80000.00);
+INSERT INTO CUSTOMERS VALUES (5, 'Hari Das Upadaya', 28, 'Udupi', 90000.00);
+
+-- To Display Customer table--
+SELECT * FROM CUSTOMERS;
+DELIMITER //
+CREATE TRIGGER after_insert_salary_difference
+AFTER INSERT ON CUSTOMERS
+FOR EACH ROW
+BEGIN
+ SET @my_sal_diff = CONCAT('salary inserted is ', NEW.SALARY);
+END;//
+DELIMITER ;
+
+-- TO INSERT VALUES AFTER TRIGGER
+INSERT INTO CUSTOMERS
+VALUES (6, 'amit kumar', 38, 'bijapur', 90000.00);
+-- SELECT THE VARIABLE @my_sal_diff CREATED IN TRIGGER
+SELECT @my_sal_diff AS SALARY_INSERTED;
+
+-- TO CREATE TRIGGER after_update_salary_difference
+DELIMITER //
+CREATE TRIGGER after_update_salary_difference
+AFTER UPDATE ON CUSTOMERS
+FOR EACH ROW
+BEGIN
+ DECLARE old_salary DECIMAL(10, 2);
+ DECLARE new_salary DECIMAL(10, 2);
+ SET old_salary = OLD.SALARY;
+ SET new_salary = NEW.SALARY;
+SET @my_sal_diff = CONCAT('salary difference after update is ', NEW.SALARY -
+OLD.SALARY);
+END;//
+DELIMITER ;
+UPDATE CUSTOMERS SET SALARY=95000 WHERE ID=6;
+SELECT @my_sal_diff AS salary_difference;
+
+-- DELETE TRIGGER
+DELIMITER //
+CREATE TRIGGER after_delete_salary_difference
+AFTER DELETE ON CUSTOMERS
+FOR EACH ROW
+BEGIN
+ SET @my_sal_diff = CONCAT('salary deleted is ', OLD.SALARY);
+END;//
+DELIMITER ;
+SELECT * FROM CUSTOMERS;
+DELETE FROM CUSTOMERS WHERE ID=1;
+SELECT @my_sal_diff AS Deleted_Salary;
