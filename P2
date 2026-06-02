@@ -1,0 +1,41 @@
+CREATE TABLE Employee1 (
+ EMPNO INT,
+ ENAME VARCHAR(50),
+ JOB VARCHAR(50),
+ MANAGER INT,
+ SAL DECIMAL(10, 2)
+);
+
+a. Add a column commission with domain to the Employee table.
+ALTER TABLE Employee1
+ADD commission DECIMAL (10, 2);
+
+b. Insert any five records into the table.
+INSERT INTO Employee1 (EMPNO, ENAME, JOB, MGR, SAL, commission)
+VALUES (101, 'John Doe', 'Manager', NULL, 5000.00, 1000.00);
+INSERT INTO Employee1 (EMPNO, ENAME, JOB, MGR, SAL, commission)
+VALUES (102, 'Jane Smith', 'Developer', 101, 4000.00, 500.00);
+INSERT INTO Employee1 (EMPNO, ENAME, JOB, MGR, SAL, commission)
+VALUES (103, 'Bob Johnson', 'Analyst', 101, 3500.00, NULL);
+INSERT INTO Employee1 (EMPNO, ENAME, JOB, MGR, SAL, commission)
+VALUES (104, 'Alice Jones', 'Designer', 101, 3800.00, 800.00);
+INSERT INTO Employee1 (EMPNO, ENAME, JOB, MGR, SAL, commission)
+VALUES (105, 'Michael Brown', 'Engineer', 101, 4200.00, 700.00);
+SELECT * FROM Employee1;
+
+c. Update the column details of the job.
+SET SQL_SAFE_UPDATES = 0;
+UPDATE Employee1
+SET JOB = 'Quality Analyst'
+WHERE EMPNO = 105;
+SELECT*FROM employee1
+
+d. Rename a column of the Employee table using the ALTER command.
+ALTER TABLE Employee1
+RENAME COLUMN MANAGER to MGR;
+SELECT * FROM Employee1;
+
+e. Delete the Employee whose EMPNO is 105.
+DELETE FROM Employee1
+WHERE EMPNO = 105;
+SELECT * FROM Employee1;
